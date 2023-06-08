@@ -25,32 +25,24 @@ class Car {
 
 }
 
-$car1 = new Car ("BMW" , "X5");
-$car2 = new Car ("Fiat" , "Panda");
-$car3 = new Car ("Audi" , "r8");
-
-
-print_r($car1);
-print_r($car2);
-print_r($car3);
 
 
 
-class Description extends Car {
-    public $category;
+
+
+class Suv extends Car {
+    public $height;
     public $doors;
-    public $horsepower;
-    public $fuel;
-    public $price;
+    
+    
     public static $counter = 0;
 
-    public function __construct($brand , $model , $category , $doors , $horsepower , $fuel , $price){
+    public function __construct($brand , $model , $height , $doors){
         parent::__construct($brand ,$model);
-        $this-> category = $category;
+        
+        $this-> height = $height;
         $this-> doors = $doors;
-        $this-> horsepower = $horsepower;
-        $this-> fuel = $fuel;
-        $this-> price = $price;
+       
         self::$counter++ ;
     }
     public static function countCars(){
@@ -59,12 +51,67 @@ class Description extends Car {
     }
 
    }
-$car1 = new Description ("BMW" , "X5" , "SUV" , 5 , 175 , "diesel", 55.000);
-$car2 = new Description("Fiat" , "Panda","utilitaria" , 5 , 60 , "gpl", 10.000);
-$car3 = new Description ("Audi" , "r8","sportiva" , 3 , 350 , "benzina", 150.000);
+
+
+   class Utilitary extends Car {
+    public $baggageDimension;
+    public $seat;
+   
+    
+    public static $counter = 0;
+
+    public function __construct($brand , $model , $baggageDimension , $seat){
+        parent::__construct($brand ,$model);
+        
+        $this-> baggageDimension = $baggageDimension;
+        $this-> seat = $seat;
+        
+        self::$counter++ ;
+    }
+    public static function countCars(){
+        return self::$counter;
+
+    }
+
+   }
+
+   class Sportcar extends Car {
+    
+    public $horsepower;
+    public $fuel;
+    
+    public static $counter = 0;
+
+    public function __construct($brand , $model , $horsepower , $fuel){
+        parent::__construct($brand ,$model);
+        
+        $this-> horsepower = $horsepower;
+        $this-> fuel = $fuel;
+        
+        self::$counter++ ;
+    }
+    public static function countCars(){
+        return self::$counter;
+
+    }
+
+   }
+$car1 = new Suv ("BMW" , "X5" , 1.90, 5);
+$car2 = new Utilitary("Fiat" , "Panda", 300, 4);
+$car3 = new Sportcar ("Audi" , "r8", 500 , "gasoline");
 
 print_r($car1);
 print_r($car2);
 print_r($car3);
-print_r(Car::countCars() . "\n");
-print_r(Description::countCars());
+print_r("All cars " . Car::countCars() . "\n");
+print_r("Number of Suv " . Suv::countCars() . "\n");
+print_r("Number of Utilitary " .Utilitary::countCars() . "\n");
+print_r("Number of Sportcar " .Sportcar::countCars() . "\n");
+
+echo "Car 1: " . $car1->brand . " " . $car1->model . " " . "Height:" . $car1->height . "  " . "Doors:"  . $car1->doors . "\n"; 
+
+echo "Car 2: " . $car2->brand . " " . $car2->model . " " . "baggageDimension:" . $car2->baggageDimension . "  " . "seat:"  . $car2->seat . "\n"; 
+
+
+echo "Car 3: " . $car3->brand . " " . $car3->model . " " . "horsepower:" . $car3->horsepower . "  " . "fuel:"  . $car3->fuel . "\n"; 
+
